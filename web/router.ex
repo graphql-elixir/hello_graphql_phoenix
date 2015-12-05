@@ -19,8 +19,9 @@ defmodule HelloGraphQL.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", HelloGraphQL do
-  #   pipe_through :api
-  # end
+  scope "/graphql" do
+    pipe_through :api
+
+    forward "/hello", GraphQL.Plug.Endpoint, schema: {GraphQL.Schema.HelloWorld, :schema}
+  end
 end
