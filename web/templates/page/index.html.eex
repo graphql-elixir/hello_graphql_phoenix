@@ -1,6 +1,6 @@
 <div class="jumbotron">
-  <h2>Welcome to Phoenix!</h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
+  <h2>Welcome to GraphQL!</h2>
+  <p class="lead">A better way to build APIs.</p>
 </div>
 
 <div class="row marketing">
@@ -8,13 +8,25 @@
     <h4>Resources</h4>
     <ul>
       <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
+        <a href="http://hex.pm/packages/plug_graphql">GraphQL Plug Hex Package</a>
       </li>
       <li>
-        <a href="http://hexdocs.pm/phoenix">Docs</a>
+        <a href="http://hexdocs.pm/plug_graphql">GraphQL Plug Docs</a>
       </li>
       <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
+        <a href="https://github.com/joshprice/plug_graphql">GraphQL Plug Source</a>
+      </li>
+      <li>
+        <a href="http://hex.pm/packages/graphql">GraphQL Core Hex Package</a>
+      </li>
+      <li>
+        <a href="http://hexdocs.pm/graphql">GraphQL Core Docs</a>
+      </li>
+      <li>
+        <a href="https://github.com/joshprice/graphql-elixir">GraphQL Core Source</a>
+      </li>
+      <li>
+        <a href="http://facebook.github.io/graphql/">GraphQL Spec</a>
       </li>
     </ul>
   </div>
@@ -23,13 +35,7 @@
     <h4>Help</h4>
     <ul>
       <li>
-        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
-      </li>
-      <li>
-        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
+        <a href="https://graphql-slack.herokuapp.com/">Erlang channel on the GraphQL Slack</a>
       </li>
     </ul>
   </div>

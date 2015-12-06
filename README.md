@@ -13,3 +13,9 @@ Clone this repo and start your Phoenix app:
   2. Start Phoenix endpoint with `mix phoenix.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+## Resources
+
+* GraphQL Plug https://github.com/joshprice/plug_graphql
+* GraphQL Elixir Core https://github.com/joshprice/graphql-elixir
+* GraphQL Spec http://facebook.github.io/graphql
