@@ -1,18 +1,15 @@
-# HelloGraphQL
+# Hello GraphQL Phoenix
 
-To start your Phoenix app:
+[![Build Status](https://travis-ci.org/joshprice/hello_graphql_phoenix.svg)](https://travis-ci.org/joshprice/hello_graphql_phoenix)
+[![Public Slack Discussion](https://graphql-slack.herokuapp.com/badge.svg)](https://graphql-slack.herokuapp.com/)
+
+This is a Phoenix containing examples of how to use [plug_graphql](https://github.com/joshprice/plug_graphql) which in turn uses the [GraphQL Elixir Core](https://github.com/joshprice/graphql-elixir)
+
+## Installation
+
+Clone this repo and start your Phoenix app:
 
   1. Install dependencies with `mix deps.get`
   2. Start Phoenix endpoint with `mix phoenix.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
-
-## Learn more
-
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: http://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
