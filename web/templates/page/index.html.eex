@@ -5,6 +5,18 @@
 
 <div class="row marketing">
   <div class="col-lg-6">
+    <h4>Hello World Example</h4>
+    <ul>
+      <li>
+        <a href="/graphql/hello?query={greeting}">/graphql/hello?query={greeting}</a>
+      </li>
+      <li>
+        <a href='/graphql/hello?query={greeting(name:"Joe")}'>/graphql/hello?query={greeting(name:"Joe")}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-lg-6">
     <h4>Resources</h4>
     <ul>
       <li>
