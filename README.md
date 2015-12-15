@@ -14,6 +14,18 @@ Clone this repo and start your Phoenix app:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
+## Examples
+
+Using [plug_graphql](https://github.com/joshprice/plug_graphql) with Phoenix is very simple.
+
+Simply mount your GraphQL endpoint like so:
+
+1. Define your schema in `web/graphql` (see https://github.com/joshprice/hello_graphql_phoenix/tree/master/web/graphql)
+2. [Mount your endpoint](https://github.com/joshprice/hello_graphql_phoenix/blob/master/web/router.ex#L22-L26)
+3. (Defining your datastore is coming soon...)
+
+-
+
 ## Resources
 
 * GraphQL Plug https://github.com/joshprice/plug_graphql
