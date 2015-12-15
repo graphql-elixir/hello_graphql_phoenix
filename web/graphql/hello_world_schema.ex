@@ -1,13 +1,16 @@
 defmodule GraphQL.Schema.HelloWorld do
+  alias GraphQL.Schema
+  alias GraphQL.ObjectType
+
   def schema do
-    %GraphQL.Schema{
-      query: %GraphQL.ObjectType{
-        name: "RootQueryType",
+    %Schema{
+      query: %ObjectType{
+        name: "HelloWorld",
         fields: %{
-          greeting: %GraphQL.FieldDefinition{
+          greeting: %{
             type: "String",
-            args: %{ name: %{ type: "String" } },
-            resolve: {GraphQL.Schema.HelloWorld, :greeting}
+            args: %{name: %{type: "String"}},
+            resolve: {Schema.HelloWorld, :greeting}
           }
         }
       }

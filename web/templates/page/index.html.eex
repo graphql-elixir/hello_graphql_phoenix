@@ -17,6 +17,18 @@
   </div>
 
   <div class="col-lg-6">
+    <h4>Simple Blog Example</h4>
+    <ul>
+      <li>
+        <a href="/graphql/blog?query={article(id:1){id,title,body,author{name}}}">/graphql/blog?query={article(id:"1"){id,title,body,author{name}}}</a>
+      </li>
+      <li>
+        <a href="/graphql/blog?query={feed{title,body},article(id:1){id,title,body,author{name}}}">/graphql/blog?query={feed{title,body},article(id:1){id,title,body,author{name}}}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-lg-6">
     <h4>Resources</h4>
     <ul>
       <li>

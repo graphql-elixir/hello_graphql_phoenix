@@ -22,6 +22,12 @@ defmodule HelloGraphQL.Router do
   scope "/graphql" do
     pipe_through :api
 
-    forward "/hello", GraphQL.Plug.Endpoint, schema: {GraphQL.Schema.HelloWorld, :schema}
+    # Hello World example
+    get  "/hello", GraphQL.Plug.Endpoint, schema: {GraphQL.Schema.HelloWorld, :schema}
+    post "/hello", GraphQL.Plug.Endpoint, schema: {GraphQL.Schema.HelloWorld, :schema}
+
+    # Simple Blog example
+    get  "/blog",  GraphQL.Plug.Endpoint, schema: {GraphQL.Schema.SimpleBlog, :schema}
+    post "/blog",  GraphQL.Plug.Endpoint, schema: {GraphQL.Schema.SimpleBlog, :schema}
   end
 end
