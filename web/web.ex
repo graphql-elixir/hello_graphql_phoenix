@@ -18,7 +18,7 @@ defmodule HelloGraphQL.Web do
 
   def model do
     quote do
-      # Define common model functionality
+      use Ecto.Model
     end
   end
 
