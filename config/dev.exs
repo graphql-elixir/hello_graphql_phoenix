@@ -31,3 +31,11 @@ config :logger, :console, format: "[$level] $message\n"
 # Do not configure such in production as keeping
 # and calculating stacktraces is usually expensive.
 config :phoenix, :stacktrace_depth, 20
+
+config :hello_graphql, HelloGraphQL.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: "postgres",
+  password: "",
+  database: "hello_graphql_dev",
+  hostname: "localhost",
+  pool_size: 10
