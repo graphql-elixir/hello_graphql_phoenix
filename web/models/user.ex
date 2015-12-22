@@ -21,9 +21,15 @@ defmodule HelloGraphQL.User do
     |> cast(params, @required_fields, @optional_fields)
   end
 
-  def find(user_id) do
+  def find_by_name(name) do
     query = from u in HelloGraphQL.User,
-      where: u.id == ^user_id
+      where: u.name == ^name
+    # this could break if more than theres more than 1 user with same name.
+    HelloGraphQL.Repo.one(query)
+  end
+  def find_by_id(id) do
+    query = from u in HelloGraphQL.User,
+      where: u.id == ^id
     HelloGraphQL.Repo.one(query)
   end
 end

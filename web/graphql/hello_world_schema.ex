@@ -9,7 +9,10 @@ defmodule GraphQL.Schema.HelloWorld do
         fields: %{
           greeting: %{
             type: "String",
-            args: %{name: %{type: "String"}},
+            args: %{
+              id: %{type: "String"},
+              name: %{type: "String"},
+            },
             resolve: {Schema.HelloWorld, :greeting}
           }
         }
@@ -17,8 +20,12 @@ defmodule GraphQL.Schema.HelloWorld do
     }
   end
 
-  def greeting(_, %{name: user_id}, _) do
-    user = HelloGraphQL.User.find(user_id)
+  def greeting(_, %{name: name}, _) do
+    user = HelloGraphQL.User.find_by_name(name)
+    "Hello, #{user.name}!"
+  end
+  def greeting(_, %{id: id}, _) do
+    user = HelloGraphQL.User.find_by_id(id)
     "Hello, #{user.name}!"
   end
   def greeting(_, _, _), do: "Hello, world!"
