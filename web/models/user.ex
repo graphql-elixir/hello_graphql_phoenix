@@ -20,4 +20,10 @@ defmodule HelloGraphQL.User do
     model
     |> cast(params, @required_fields, @optional_fields)
   end
+
+  def find(user_id) do
+    query = from u in HelloGraphQL.User,
+      where: u.id == ^user_id
+    HelloGraphQL.Repo.one(query)
+  end
 end

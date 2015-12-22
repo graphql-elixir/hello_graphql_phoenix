@@ -17,6 +17,9 @@ defmodule GraphQL.Schema.HelloWorld do
     }
   end
 
-  def greeting(_, %{name: name}, _), do: "Hello, #{name}!"
+  def greeting(_, %{name: user_id}, _) do
+    user = HelloGraphQL.User.find(user_id)
+    "Hello, #{user.name}!"
+  end
   def greeting(_, _, _), do: "Hello, world!"
 end
