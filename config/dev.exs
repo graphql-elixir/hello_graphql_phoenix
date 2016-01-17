@@ -33,9 +33,5 @@ config :logger, :console, format: "[$level] $message\n"
 config :phoenix, :stacktrace_depth, 20
 
 config :hello_graphql, HelloGraphQL.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "",
-  database: "hello_graphql_dev",
-  hostname: "localhost",
-  pool_size: 10
+  adapter: Sqlite.Ecto,
+  database: "hello_graphql_dev.sqlite3"
