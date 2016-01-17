@@ -12,7 +12,7 @@
 HelloGraphQL.Repo.delete_all(HelloGraphQL.User)
 
 Enum.map 1..10, fn (x) ->
-  params = %{name: "Garrett - #{x}"}
+  params = %{name: "Garrett#{x}"}
 
   HelloGraphQL.User.changeset(%HelloGraphQL.User{}, params)
   |> HelloGraphQL.Repo.insert!
