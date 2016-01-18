@@ -9,10 +9,7 @@ defmodule GraphQL.Schema.HelloWorld do
         fields: %{
           greeting: %{
             type: "String",
-            args: %{
-              id: %{type: "String"},
-              name: %{type: "String"},
-            },
+            args: %{name: %{type: "String"}},
             resolve: {Schema.HelloWorld, :greeting}
           }
         }
