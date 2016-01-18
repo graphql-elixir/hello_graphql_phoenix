@@ -18,7 +18,7 @@ defmodule HelloGraphQL.Mixfile do
   def application do
     [mod: {HelloGraphQL, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger,
-                    :phoenix_ecto]]
+                    :phoenix_ecto, :sqlite_ecto]]
   end
 
   # Specifies which paths to compile per environment.
