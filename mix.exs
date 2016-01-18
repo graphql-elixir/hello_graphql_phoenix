@@ -17,7 +17,8 @@ defmodule HelloGraphQL.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {HelloGraphQL, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger]]
+     applications: [:phoenix, :phoenix_html, :cowboy, :logger,
+                    :phoenix_ecto, :sqlite_ecto]]
   end
 
   # Specifies which paths to compile per environment.
@@ -29,6 +30,8 @@ defmodule HelloGraphQL.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [{:phoenix, "~> 1.1"},
+     {:phoenix_ecto, "~> 2.0"},
+     {:sqlite_ecto, "~> 1.0.0"},
      {:phoenix_html, "~> 2.3"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:cowboy, "~> 1.0"},

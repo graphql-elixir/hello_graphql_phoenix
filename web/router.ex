@@ -29,5 +29,9 @@ defmodule HelloGraphQL.Router do
     # Simple Blog example
     get  "/blog",  GraphQL.Plug.Endpoint, schema: {GraphQL.Schema.SimpleBlog, :schema}
     post "/blog",  GraphQL.Plug.Endpoint, schema: {GraphQL.Schema.SimpleBlog, :schema}
+
+    # Ecto integration
+    get  "/ecto", GraphQL.Plug.Endpoint, schema: {GraphQL.Schema.EctoWorld, :schema}
+    post "/ecto", GraphQL.Plug.Endpoint, schema: {GraphQL.Schema.EctoWorld, :schema}
   end
 end
