@@ -1,6 +1,8 @@
 defmodule GraphQL.Schema.EctoWorld do
   alias GraphQL.Schema
-  alias GraphQL.ObjectType
+  alias GraphQL.Type.ObjectType
+  alias GraphQL.Type.String
+  alias GraphQL.Type.ID
 
   def schema do
     %Schema{
@@ -8,10 +10,10 @@ defmodule GraphQL.Schema.EctoWorld do
         name: "EctoWorld",
         fields: %{
           greeting: %{
-            type: "String",
+            type: %String{},
             args: %{
-              id: %{type: "String"},
-              name: %{type: "String"},
+              id: %{type: %ID{}},
+              name: %{type: %String{}},
             },
             resolve: {Schema.EctoWorld, :greeting}
           }

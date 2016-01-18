@@ -22,16 +22,27 @@ defmodule HelloGraphQL.Router do
   scope "/graphql" do
     pipe_through :api
 
-    # Hello World example
-    get  "/hello", GraphQL.Plug.Endpoint, schema: {GraphQL.Schema.HelloWorld, :schema}
-    post "/hello", GraphQL.Plug.Endpoint, schema: {GraphQL.Schema.HelloWorld, :schema}
+    # Option 1: Wrap
+    # --------------
 
-    # Simple Blog example
-    get  "/blog",  GraphQL.Plug.Endpoint, schema: {GraphQL.Schema.SimpleBlog, :schema}
-    post "/blog",  GraphQL.Plug.Endpoint, schema: {GraphQL.Schema.SimpleBlog, :schema}
+    # forward "/hello", HelloWorldExample
+    # forward "/blog", SimpleBlogExample
+    # forward "/ecto_world", EctoWorldExample
 
-    # Ecto integration
-    get  "/ecto", GraphQL.Plug.Endpoint, schema: {GraphQL.Schema.EctoWorld, :schema}
-    post "/ecto", GraphQL.Plug.Endpoint, schema: {GraphQL.Schema.EctoWorld, :schema}
+    # Option 2: get/post
+    # ------------------
+    get  "/hello",    GraphQL.Plug, schema: {GraphQL.Schema.HelloWorld, :schema}
+    post "/hello",    GraphQL.Plug, schema: {GraphQL.Schema.HelloWorld, :schema}
+
+    get  "/blog",     GraphQL.Plug, schema: {GraphQL.Schema.SimpleBlog, :schema}
+    post "/blog",     GraphQL.Plug, schema: {GraphQL.Schema.SimpleBlog, :schema}
+
+    get  "/ecto",     GraphQL.Plug, schema: {GraphQL.Schema.EctoWorld, :schema}
+    post "/ecto",     GraphQL.Plug, schema: {GraphQL.Schema.EctoWorld, :schema}
+
+    # Option 3: match
+    # ---------------
+    # match  "/hello", GraphQL.Plug.Endpoint, schema: {GraphQL.Schema.HelloWorld, :schema}
+    # match  "/blog",  GraphQL.Plug.Endpoint, schema: {GraphQL.Schema.SimpleBlog, :schema}
   end
 end

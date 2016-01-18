@@ -1,17 +1,21 @@
 defmodule GraphQL.Schema.SimpleBlog do
   alias GraphQL.Schema
-  alias GraphQL.ObjectType
-  alias GraphQL.List
+  alias GraphQL.Type.ObjectType
+  alias GraphQL.Type.List
   alias GraphQL.Type.NonNull
+  alias GraphQL.Type.ID
+  alias GraphQL.Type.String
+  alias GraphQL.Type.Int
+  alias GraphQL.Type.Boolean
 
   def schema do
     image = %ObjectType{
       name: "Image",
       description: "Images for an article or a profile picture",
       fields: %{
-        url: %{type: "String"},
-        width: %{type: "Int"},
-        height: %{type: "Int"}
+        url: %{type: %String{}},
+        width: %{type: %Int{}},
+        height: %{type: %Int{}}
       }
     }
 
@@ -19,12 +23,12 @@ defmodule GraphQL.Schema.SimpleBlog do
       name: "Author",
       description: "Author of the blog, with their profile picture and latest article",
       fields: %{
-        id: %{type: "String"},
-        name: %{type: "String"},
+        id: %{type: %String{}},
+        name: %{type: %String{}},
         pic: %{
           args: %{
-            width: %{type: "Int"},
-            height: %{type: "Int"}
+            width: %{type: %Int{}},
+            height: %{type: %Int{}}
           },
           type: image,
           resolve: fn(o, %{width: w, height: h}, _) -> o.pic(w, h) end
@@ -36,12 +40,12 @@ defmodule GraphQL.Schema.SimpleBlog do
       name: "Article",
       description: "A blog post",
       fields: %{
-        id: %{type: %NonNull{of_type: "String"}},
-        isPublished: %{type: "Boolean"},
+        id: %{type: %NonNull{ofType: %String{}}},
+        isPublished: %{type: %Boolean{}},
         author: %{type: author},
-        title: %{type: "String"},
-        body: %{type: "String"},
-        keywords: %{type: %List{of_type: "String"}}
+        title: %{type: %String{}},
+        body: %{type: %String{}},
+        keywords: %{type: %List{ofType: %String{}}}
       }
     }
 
@@ -50,11 +54,11 @@ defmodule GraphQL.Schema.SimpleBlog do
       fields: %{
         article: %{
           type: article,
-          args: %{id: %{type: "ID"}},
+          args: %{id: %{type: %ID{}}},
           resolve: fn(_, %{id: id}, _) -> make_article(id) end
         },
         feed: %{
-          type: %List{of_type: article},
+          type: %List{ofType: article},
           resolve: fn(_, _, _) -> for id <- 1..2, do: make_article(id) end
         }
       }

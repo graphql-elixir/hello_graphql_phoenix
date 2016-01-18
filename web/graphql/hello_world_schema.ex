@@ -1,6 +1,7 @@
 defmodule GraphQL.Schema.HelloWorld do
   alias GraphQL.Schema
-  alias GraphQL.ObjectType
+  alias GraphQL.Type.ObjectType
+  alias GraphQL.Type.String
 
   def schema do
     %Schema{
@@ -8,8 +9,8 @@ defmodule GraphQL.Schema.HelloWorld do
         name: "HelloWorld",
         fields: %{
           greeting: %{
-            type: "String",
-            args: %{name: %{type: "String"}},
+            type: %String{},
+            args: %{name: %{type: %String{}}},
             resolve: {Schema.HelloWorld, :greeting}
           }
         }
