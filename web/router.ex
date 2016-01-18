@@ -40,6 +40,9 @@ defmodule HelloGraphQL.Router do
     get  "/ecto",     GraphQL.Plug, schema: {GraphQL.Schema.EctoWorld, :schema}
     post "/ecto",     GraphQL.Plug, schema: {GraphQL.Schema.EctoWorld, :schema}
 
+    get  "/starwars", GraphQL.Plug, schema: {GraphQL.Schema.StarWars, :schema}
+    post "/starwars", GraphQL.Plug, schema: {GraphQL.Schema.StarWars, :schema}
+
     # Option 3: match
     # ---------------
     # match  "/hello", GraphQL.Plug.Endpoint, schema: {GraphQL.Schema.HelloWorld, :schema}
