@@ -18,6 +18,7 @@ defmodule HelloGraphQL.Mixfile do
   def application do
     [mod: {HelloGraphQL, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger,
+                    :plug_graphql, :graphql,
                     :phoenix_ecto, :sqlite_ecto]]
   end
 
@@ -35,6 +36,6 @@ defmodule HelloGraphQL.Mixfile do
      {:phoenix_html, "~> 2.3"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:cowboy, "~> 1.0"},
-     {:plug_graphql, "~> 0.0.7"}]
+     {:plug_graphql, "~> 0.1.0"}]
   end
 end

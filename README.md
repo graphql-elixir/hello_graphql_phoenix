@@ -10,7 +10,8 @@ This is a Phoenix containing examples of how to use [plug_graphql](https://githu
 Clone this repo and start your Phoenix app:
 
   1. Install dependencies with `mix deps.get`
-  2. Start Phoenix endpoint with `mix phoenix.server`
+  2. Setup your DB for the Ecto example with `mix ecto.migrate` and `mix run priv/repo/seeds.exs`
+  3. Start Phoenix endpoint with `mix phoenix.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
@@ -22,7 +23,6 @@ Simply mount your GraphQL endpoint like so:
 
 1. Define your schema in `web/graphql` (see https://github.com/joshprice/hello_graphql_phoenix/tree/master/web/graphql)
 2. [Mount your endpoint](https://github.com/joshprice/hello_graphql_phoenix/blob/master/web/router.ex#L22-L26)
-3. (Defining your datastore is coming soon...)
 
 -
 
