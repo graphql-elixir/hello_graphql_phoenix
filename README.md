@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/joshprice/hello_graphql_phoenix.svg)](https://travis-ci.org/joshprice/hello_graphql_phoenix)
 [![Public Slack Discussion](https://graphql-slack.herokuapp.com/badge.svg)](https://graphql-slack.herokuapp.com/)
 
-This is a Phoenix containing examples of how to use [plug_graphql](https://github.com/joshprice/plug_graphql) which in turn uses the [GraphQL Elixir Core](https://github.com/joshprice/graphql-elixir)
+This is a Phoenix app containing examples of how to use [plug_graphql](https://github.com/joshprice/plug_graphql) which in turn uses the [GraphQL Elixir Core](https://github.com/joshprice/graphql-elixir)
 
 ## Installation
 
