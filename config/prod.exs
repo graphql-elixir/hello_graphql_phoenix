@@ -22,10 +22,10 @@ config :hello_graphql, HelloGraphQL.Endpoint,
 config :logger, level: :info
 
 # Configure your database
-# config :hello_phoenix, HelloPhoenix.Repo,
-#   adapter: Ecto.Adapters.Postgres,
-#   url: System.get_env("DATABASE_URL"),
-#   pool_size: 20
+config :hello_graphql, HelloGraphQL.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  url: System.get_env("DATABASE_URL"),
+  pool_size: 20
 
 # ## SSL Support
 #

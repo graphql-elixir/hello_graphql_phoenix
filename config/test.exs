@@ -8,7 +8,3 @@ config :hello_graphql, HelloGraphQL.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
-
-config :hello_graphql, HelloGraphQL.Repo,
-  adapter: Sqlite.Ecto,
-  database: "hello_graphql_tests.sqlite3"

@@ -19,7 +19,7 @@ defmodule HelloGraphQL.Mixfile do
     [mod: {HelloGraphQL, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger,
                     :plug_graphql, :graphql,
-                    :phoenix_ecto, :sqlite_ecto]]
+                    :phoenix_ecto, :postgrex]]
   end
 
   # Specifies which paths to compile per environment.
@@ -31,11 +31,11 @@ defmodule HelloGraphQL.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [{:phoenix, "~> 1.1"},
-     {:phoenix_ecto, "~> 2.0"},
-     {:sqlite_ecto, "~> 1.0.0"},
+     {:phoenix_ecto, "~> 1.1"},
+     {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 2.3"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:cowboy, "~> 1.0"},
-     {:plug_graphql, "~> 0.1.0"}]
+     {:plug_graphql, "~> 0.1.3"}]
   end
 end
