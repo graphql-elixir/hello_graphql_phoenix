@@ -10,8 +10,11 @@ This is a Phoenix app containing examples of how to use [plug_graphql](https://g
 Clone this repo and start your Phoenix app:
 
   1. Install dependencies with `mix deps.get`
-  2. Setup your DB for the Ecto example with `mix ecto.migrate` and `mix run priv/repo/seeds.exs`
-  3. Start Phoenix endpoint with `mix phoenix.server`
+  2. Create your development database using `mix ecto.create`.
+     NOTE: you may need to edit `config/dev.exs` to set up your database configuration
+     if it is not configured for passwordless logins on localhost.
+  3. Setup your DB for the Ecto example with `mix ecto.migrate` and `mix run priv/repo/seeds.exs`
+  4. Start Phoenix endpoint with `mix phoenix.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
