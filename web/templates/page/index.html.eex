@@ -37,7 +37,7 @@
         </a>
       </li>
       <li>
-        <a href="/graphql/ecto?query={greeting(name:Garrett1)}">
+        <a href="/graphql/ecto?query={greeting(name:\"Garrett1\")}">
           /graphql/ecto?query={greeting(name:"Garrett1")}
         </a>
       </li>
