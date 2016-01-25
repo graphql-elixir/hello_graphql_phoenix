@@ -53,9 +53,12 @@ defmodule GraphQL.Schema.SimpleBlog do
       name: "Query",
       fields: %{
         article: %{
-          type: article,
+          type: %List{ofType: article},
           args: %{id: %{type: %ID{}}},
-          resolve: fn(_, %{id: id}, _) -> make_article(id) end
+          resolve: fn
+            _, %{id: id}, _ -> [make_article(id)]
+            _, _, _         -> for id <- 1..2, do: make_article(id)
+          end
         },
         feed: %{
           type: %List{ofType: article},
