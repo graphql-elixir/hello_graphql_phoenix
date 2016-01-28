@@ -24,13 +24,17 @@ defmodule GraphQL.Schema.StarWars do
       name: "Character",
       description: "A character in the Star Wars Trilogy",
       fields: quote do %{
-        id: %{type: %String{}},
+        id: %{type: %NonNull{ofType: %String{}}},
         name: %{type: %String{}},
         friends: %{type: %List{ofType: GraphQL.Schema.StarWars.character_interface}},
         appears_in: %{type: %List{ofType: GraphQL.Schema.StarWars.episode_enum}}
       } end,
       resolver: fn(x) ->
-        if StarWars.Data.get_human(x.id), do: GraphQL.Schema.StarWars.human_type, else: GraphQL.Schema.StarWars.droid_type
+        if StarWars.Data.get_human(x.id) do
+          GraphQL.Schema.StarWars.human_type
+        else
+          GraphQL.Schema.StarWars.droid_type
+        end
       end
     } |> Interface.new
   end
@@ -40,7 +44,7 @@ defmodule GraphQL.Schema.StarWars do
       name: "Human",
       description: "A humanoid creature in the Star Wars universe",
       fields: %{
-        id: %{type: %String{}},
+        id: %{type: %NonNull{ofType: %String{}}},
         name: %{type: %String{}},
         friends: %{
           type: %List{ofType: character_interface},
