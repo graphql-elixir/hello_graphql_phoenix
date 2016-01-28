@@ -29,7 +29,7 @@
   </div>
 
   <div class="col-lg-12">
-    <h4>Ecto Example</h4>
+    <h4>Simple Ecto Example</h4>
     <ul>
       <li>
         <a href="/graphql/ecto?query={greeting(id:2)}">
@@ -37,8 +37,24 @@
         </a>
       </li>
       <li>
-        <a href="/graphql/ecto?query={greeting(name:\"Garrett1\")}">
+        <a href='/graphql/ecto?query={greeting(name:"Garrett1")}'>
           /graphql/ecto?query={greeting(name:"Garrett1")}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-lg-12">
+    <h4>Star Wars Example</h4>
+    <ul>
+      <li>
+        <a href="/graphql/starwars?query={hero{name}}">
+          /graphql/starwars?query={hero{name}}
+        </a>
+      </li>
+      <li>
+        <a href='/graphql/starwars?query={hero(episode:EMPIRE){name}}'>
+          /graphql/starwars?query={hero(episode:EMPIRE){name}}
         </a>
       </li>
     </ul>
