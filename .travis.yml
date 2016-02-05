@@ -1,4 +1,7 @@
+sudo: required
 language: elixir
+services:
+  - docker
 elixir:
   - 1.2
 otp_release:
@@ -7,3 +10,7 @@ addons:
   postgresql: '9.4'
 before_script:
   - mix do ecto.create, ecto.migrate, run priv/repo/seeds.exs
+deploy:
+  - docker build -t graphqlelixir/graphql-elixir-org .
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push graphqlelixir/graphql-elixir-org
