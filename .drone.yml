@@ -1,0 +1,23 @@
+build:
+  image: bitwalker/alpine-elixir-phoenix:2.0
+  commands:
+    - scripts/ci/install_local_dependencies.sh
+    - scripts/ci/execute_tests.sh
+    - scripts/ci/build_release.sh
+  environment:
+    - SECRET_KEY_BASE=$$SECRET_KEY_BASE
+
+cache:
+  mount:
+    - deps
+    - node_modules
+
+publish:
+  docker:
+    username: $$DOCKER_USERNAME
+    password: $$DOCKER_PASS
+    email: $$DOCKER_EMAIL
+    repo: graphqlelixir/graphql-elixir-org
+    tag:
+      - latest
+      - "0.0.$$BUILD_NUMBER"
