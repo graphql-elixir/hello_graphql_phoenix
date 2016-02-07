@@ -14,6 +14,7 @@ use Mix.Config
 config :hello_graphql, HelloGraphQL.Endpoint,
   http: [port: {:system, "PORT"}],
   cache_static_manifest: "priv/static/manifest.json",
+  server: true,
   secret_key_base: {:system, "SECRET_KEY_BASE"}
 
 
