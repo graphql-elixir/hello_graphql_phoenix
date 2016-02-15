@@ -12,10 +12,20 @@ cache:
 
 publish:
   docker:
-    username: $$DOCKER_USERNAME
+    file: Dockerfile
+    username: $$DOCKER_USER
     password: $$DOCKER_PASS
     email: $$DOCKER_EMAIL
     repo: graphqlelixir/graphql-elixir-org
     tag:
       - latest
-      - "0.0.$$BUILD_NUMBER"
+
+publish:
+  docker:
+    file: Dockerfile.ecto
+    username: $$DOCKER_USER
+    password: $$DOCKER_PASS
+    email: $$DOCKER_EMAIL
+    repo: graphqlelixir/graphql-elixir-org
+    tag:
+      - latest-ecto
