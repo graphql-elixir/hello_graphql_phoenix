@@ -3,6 +3,12 @@ ENV PORT=4000 MIX_ENV=prod
 
 ENV APP_NAME=hello_graphql APP_VERSION="0.0.1"
 
+RUN echo "@edge http://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
+    apk update && apk add "postgresql-client@edge>9.4" && \
+    rm -rf /var/cache/apk/* && \
+    mix hex.info && \
+    mix local.hex
+
 WORKDIR /$APP_NAME
 ADD . .
 CMD mix ecto.migrate
