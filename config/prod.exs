@@ -24,7 +24,7 @@ config :logger, level: :info
 # Configure your database
 config :hello_graphql, HelloGraphQL.Repo,
   adapter: Ecto.Adapters.Postgres,
-  database: "hello_graphql_prod",
+  database: "graphql",
   url: System.get_env("DATABASE_URL"),
   pool_size: 20
 
