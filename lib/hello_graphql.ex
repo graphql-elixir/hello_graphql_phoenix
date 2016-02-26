@@ -12,6 +12,7 @@ defmodule HelloGraphQL do
       worker(HelloGraphQL.Repo, []),
       # Here you could define other workers and supervisors as children
       # worker(HelloGraphQL.Worker, [arg1, arg2, arg3]),
+      worker(GraphQL.Schema.SimpleBlog.Data.Storage, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

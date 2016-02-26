@@ -36,7 +36,9 @@ defmodule GraphQL.Schema.SimpleBlog do
               height: %{type: %Int{}}
             },
             type: Image.type,
-            resolve: fn(o, %{width: w, height: h}, _) -> o.pic.(w, h) end
+            resolve: fn(o, %{width: w, height: h}, _) ->
+              GraphQL.Schema.SimpleBlog.Data.Storage.get_pic(o.id, w, h)
+            end
           }
         }
       }
@@ -69,13 +71,13 @@ defmodule GraphQL.Schema.SimpleBlog do
             type: %List{ofType: Article.type},
             args: %{id: %{type: %ID{}}},
             resolve: fn
-              _, %{id: id}, _ -> [GraphQL.Schema.SimpleBlog.make_article(id)]
-              _, _, _         -> for id <- 1..2, do: GraphQL.Schema.SimpleBlog.make_article(id)
+              _, %{id: id}, _ -> [GraphQL.Schema.SimpleBlog.Data.Storage.get_article(id)]
+              _, _, _         -> GraphQL.Schema.SimpleBlog.Data.Storage.get_articles
             end
           },
           feed: %{
             type: %List{ofType: Article.type},
-            resolve: fn(_, _, _) -> for id <- 1..2, do: GraphQL.Schema.SimpleBlog.make_article(id) end
+            resolve: fn(_, _, _) -> GraphQL.Schema.SimpleBlog.Data.Storage.get_articles end
           }
         }
       }
@@ -84,30 +86,5 @@ defmodule GraphQL.Schema.SimpleBlog do
 
   def schema do
     %Schema{query: Query.type}
-  end
-
-  def make_article(id) do
-    %{
-      id: "#{id}",
-      isPublished: true,
-      author: %{
-        id: "123",
-        name: "John Smith",
-        pic: fn(width, height) -> get_pic("123", width, height) end
-        # recentArticle: 1
-      },
-      title: "My Article #{id}",
-      body: "This is a post",
-      hidden: "This data is not exposed in the schema",
-      keywords: ["foo", "bar", 1, true, nil]
-    }
-  end
-
-  def get_pic(uid, width, height) do
-    %{
-      url: "cdn://#{uid}",
-      width: "#{width}",
-      height: "#{height}"
-    }
   end
 end
