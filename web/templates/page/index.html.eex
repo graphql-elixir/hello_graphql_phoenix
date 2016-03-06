@@ -70,7 +70,7 @@
         <a href="http://hexdocs.pm/plug_graphql">GraphQL Plug Docs</a>
       </li>
       <li>
-        <a href="https://github.com/joshprice/plug_graphql">GraphQL Plug Source</a>
+        <a href="https://github.com/graphql-elixir/plug_graphql">GraphQL Plug Source</a>
       </li>
       <li>
         <a href="http://hex.pm/packages/graphql">GraphQL Core Hex Package</a>
@@ -79,7 +79,7 @@
         <a href="http://hexdocs.pm/graphql">GraphQL Core Docs</a>
       </li>
       <li>
-        <a href="https://github.com/joshprice/graphql-elixir">GraphQL Core Source</a>
+        <a href="https://github.com/graphql-elixir/graphql-elixir">GraphQL Core Source</a>
       </li>
       <li>
         <a href="http://facebook.github.io/graphql/">GraphQL Spec</a>

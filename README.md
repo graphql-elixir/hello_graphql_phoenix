@@ -1,9 +1,9 @@
 # Hello GraphQL Phoenix
 
-[![Build Status](https://travis-ci.org/joshprice/hello_graphql_phoenix.svg)](https://travis-ci.org/joshprice/hello_graphql_phoenix)
+[![Build Status](https://travis-ci.org/graphql-elixir/hello_graphql_phoenix.svg)](https://travis-ci.org/graphql-elixir/hello_graphql_phoenix)
 [![Public Slack Discussion](https://graphql-slack.herokuapp.com/badge.svg)](https://graphql-slack.herokuapp.com/)
 
-This is a Phoenix app containing examples of how to use [plug_graphql](https://github.com/joshprice/plug_graphql) which in turn uses the [GraphQL Elixir Core](https://github.com/joshprice/graphql-elixir)
+This is a Phoenix app containing examples of how to use [plug_graphql](https://github.com/graphql-elixir/plug_graphql) which in turn uses the [GraphQL Elixir Core](https://github.com/graphql-elixir/graphql-elixir)
 
 ## Installation
 
@@ -20,17 +20,17 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 ## Examples
 
-Using [plug_graphql](https://github.com/joshprice/plug_graphql) with Phoenix is very simple.
+Using [plug_graphql](https://github.com/graphql-elixir/plug_graphql) with Phoenix is very simple.
 
 Simply mount your GraphQL endpoint like so:
 
-1. Define your schema in `web/graphql` (see https://github.com/joshprice/hello_graphql_phoenix/tree/master/web/graphql)
-2. [Mount your endpoint](https://github.com/joshprice/hello_graphql_phoenix/blob/master/web/router.ex#L22-L26)
+1. Define your schema in `web/graphql` (see https://github.com/graphql-elixir/hello_graphql_phoenix/tree/master/web/graphql)
+2. [Mount your endpoint](https://github.com/graphql-elixir/hello_graphql_phoenix/blob/master/web/router.ex#L22-L26)
 
 -
 
 ## Resources
 
-* GraphQL Plug https://github.com/joshprice/plug_graphql
-* GraphQL Elixir Core https://github.com/joshprice/graphql-elixir
+* GraphQL Plug https://github.com/graphql-elixir/plug_graphql
+* GraphQL Elixir Core https://github.com/graphql-elixir/graphql-elixir
 * GraphQL Spec http://facebook.github.io/graphql
