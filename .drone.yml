@@ -1,0 +1,31 @@
+build:
+  image: bitwalker/alpine-elixir-phoenix:2.0
+  commands:
+    - scripts/ci/install_local_dependencies.sh
+    - scripts/ci/execute_tests.sh
+    - scripts/ci/build_release.sh
+
+cache:
+  mount:
+    - deps
+    - node_modules
+
+publish:
+  docker:
+    file: Dockerfile
+    username: $$DOCKER_USER
+    password: $$DOCKER_PASS
+    email: $$DOCKER_EMAIL
+    repo: graphqlelixir/graphql-elixir-org
+    tag:
+      - latest
+
+publish:
+  docker:
+    file: Dockerfile.ecto
+    username: $$DOCKER_USER
+    password: $$DOCKER_PASS
+    email: $$DOCKER_EMAIL
+    repo: graphqlelixir/graphql-elixir-org
+    tag:
+      - latest-ecto
