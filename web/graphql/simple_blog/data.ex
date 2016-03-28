@@ -28,8 +28,8 @@ defmodule GraphQL.Schema.SimpleBlog.Data.Storage do
     }
   }
 
-  def make_article(id) do
-    Map.merge(@default, %{id: "#{id}", title: "My Article #{id}"})
+  def add_comment(id, %{author: _, comment: _} = comment) do
+    {:ok, new_comment} = Agent.get_and_update(__MODULE__, &do_add_comment(&1, id, comment))
   end
 
   def get_pic(uid, width, height) do
@@ -65,6 +65,10 @@ defmodule GraphQL.Schema.SimpleBlog.Data.Storage do
     new_map = Map.put_new(map, id, default_article(id))
     article = Map.fetch(new_map, id)
     { article, new_map }
+  end
+
+  defp do_add_comment(id, %{author: author, comment: comment}) do
+    
   end
 
   defp do_set_article(map, id, article) do

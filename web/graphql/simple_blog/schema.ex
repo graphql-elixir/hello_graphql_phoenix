@@ -56,7 +56,23 @@ defmodule GraphQL.Schema.SimpleBlog do
           author: %{type: Author.type},
           title: %{type: %String{}},
           body: %{type: %String{}},
-          keywords: %{type: %List{ofType: %String{}}}
+          keywords: %{type: %List{ofType: %String{}}},
+          comments: %{type: %List{ofType: Comment.type}}
+        }
+      }
+    end
+  end
+
+  defmodule Comment do
+    def type do
+      %ObjectType{
+        name: "Comment",
+        description: "A comment on a blog post.",
+        fields: %{
+          id: %{type: %NonNull{ofType: %String{}}},
+          author: %{type: %String{}},
+          comment: %{type: %String{}},
+          createdAt: %{type: %String{}}
         }
       }
     end
