@@ -1,78 +1,78 @@
 defmodule GraphQL.Schema.StarWars do
 
-  alias GraphQL.Type.ObjectType
-  alias GraphQL.Type.List
-  alias GraphQL.Type.Enum
-  alias GraphQL.Type.Interface
-  alias GraphQL.Type.String
-  alias GraphQL.Type.NonNull
+  alias GraphQL.Type.{ObjectType, List, Interface, String, NonNull}
+  alias GraphQL.Schema.StarWars.{Episode, Character, Droid, Human}
 
-  def episode_enum do
-    %{
-      name: "Episode",
-      description: "One of the films in the Star Wars Trilogy",
-      values: %{
-        NEWHOPE: %{value: 4, description: "Released in 1977"},
-        EMPIRE: %{value: 5, description: "Released in 1980"},
-        JEDI: %{value: 6, description: "Released in 1983"}
+  defmodule Episode do
+    def type do
+      GraphQL.Type.Enum.new %{
+        name: "Episode",
+        description: "One of the films in the Star Wars Trilogy",
+        values: %{
+          NEWHOPE: %{value: 4, description: "Released in 1977"},
+          EMPIRE: %{value: 5, description: "Released in 1980"},
+          JEDI: %{value: 6, description: "Released in 1983"}
+        }
       }
-    } |> Enum.new
+    end
   end
 
-  def character_interface do
-    %{
-      name: "Character",
-      description: "A character in the Star Wars Trilogy",
-      fields: quote do %{
-        id: %{type: %NonNull{ofType: %String{}}},
-        name: %{type: %String{}},
-        friends: %{type: %List{ofType: GraphQL.Schema.StarWars.character_interface}},
-        appears_in: %{type: %List{ofType: GraphQL.Schema.StarWars.episode_enum}}
-      } end,
-      resolver: fn(x) ->
-        if StarWars.Data.get_human(x.id) do
-          GraphQL.Schema.StarWars.human_type
-        else
-          GraphQL.Schema.StarWars.droid_type
+  defmodule Character do
+    def type do
+      Interface.new %{
+        name: "Character",
+        description: "A character in the Star Wars Trilogy",
+        fields: %{
+          id: %{type: %NonNull{ofType: %String{}}},
+          name: %{type: %String{}},
+          friends: %{type: %List{ofType: Character}},
+          appears_in: %{type: %List{ofType: Episode}}
+        },
+        resolver: fn(x) ->
+          if StarWars.Data.get_human(x.id), do: Human, else: Droid
         end
-      end
-    } |> Interface.new
+      }
+    end
   end
 
-  def human_type do
-    %ObjectType{
-      name: "Human",
-      description: "A humanoid creature in the Star Wars universe",
-      fields: %{
-        id: %{type: %NonNull{ofType: %String{}}},
-        name: %{type: %String{}},
-        friends: %{
-          type: %List{ofType: character_interface},
-          resolve: fn(item, _, _) -> StarWars.Data.get_friends(item) end
+  defmodule Human do
+    def type do
+      %ObjectType{
+        name: "Human",
+        description: "A humanoid creature in the Star Wars universe",
+        fields: %{
+          id: %{type: %NonNull{ofType: %String{}}},
+          name: %{type: %String{}},
+          friends: %{
+            type: %List{ofType: Character},
+            resolve: fn(item, _, _) -> StarWars.Data.get_friends(item) end
+          },
+          appears_in: %{type: %List{ofType: Episode}},
+          home_planet: %{type: %String{}}
         },
-        appears_in: %{type: %List{ofType: episode_enum}},
-        home_planet: %{type: %String{}}
-      },
-      interfaces: [GraphQL.Schema.StarWars.character_interface]
-    }
+        interfaces: [Character]
+      }
+    end
   end
 
-  def droid_type do
-    %ObjectType{
-      name: "Droid",
-      description: "A mechanical creature in the Star Wars universe",
-      fields: %{
-        id: %{type: %NonNull{ofType: %String{}}},
-        name: %{type: %String{}},
-        friends: %{
-          type: %List{ofType: character_interface},
-          resolve: fn(item, _, _) -> StarWars.Data.get_friends(item) end
+  defmodule Droid do
+    def type do
+      %ObjectType{
+        name: "Droid",
+        description: "A mechanical creature in the Star Wars universe",
+        fields: %{
+          id: %{type: %NonNull{ofType: %String{}}},
+          name: %{type: %String{}},
+          friends: %{
+            type: %List{ofType: Character},
+            resolve: fn(item, _, _) -> StarWars.Data.get_friends(item) end
+          },
+          appears_in: %{type: %List{ofType: Episode}},
+          primary_function: %{type: %String{}}
         },
-        appears_in: %{type: %List{ofType: episode_enum}},
-        primary_function: %{type: %String{}}
-      },
-      interfaces: [character_interface]
-    }
+        interfaces: [Character]
+      }
+    end
   end
 
   def query do
@@ -80,10 +80,11 @@ defmodule GraphQL.Schema.StarWars do
       name: "Query",
       fields: %{
         hero: %{
-          type: character_interface,
+          type: Character,
           args: %{
+            # TODO this should be a type InputObject
             episode: %{
-              type: episode_enum,
+              type: Episode,
               description: "If omitted, returns the hero of the whole saga. If provided, returns the hero of that particular episode"
             }
           },
@@ -92,19 +93,19 @@ defmodule GraphQL.Schema.StarWars do
           end
         },
         human: %{
-          type: human_type,
+          type: Human,
           args: %{
-            id: %{type: %String{}, description: "id of the human"}
+            id: %{type: %NonNull{ofType: %String{}}, description: "id of the human"}
           },
           resolve: fn(_, args, _) -> StarWars.Data.get_human(args.id) end
         },
         droid: %{
-          type: droid_type,
+          type: Droid,
           args: %{
-            id: %{type: %String{}, description: "id of the droid"}
+            id: %{type: %NonNull{ofType: %String{}}, description: "id of the droid"}
           },
           resolve: fn(_, args, _) -> StarWars.Data.get_droid(args.id) end
-        },
+        }
       }
     }
   end
