@@ -1,73 +1,93 @@
 defmodule GraphQL.Schema.SimpleBlog do
-  alias GraphQL.Schema
-  alias GraphQL.Type.ObjectType
-  alias GraphQL.Type.List
-  alias GraphQL.Type.NonNull
-  alias GraphQL.Type.ID
-  alias GraphQL.Type.String
-  alias GraphQL.Type.Int
-  alias GraphQL.Type.Boolean
+  alias GraphQL.Type.{ObjectType, List, NonNull, ID, String, Int, Boolean}
+  alias GraphQL.Schema.SimpleBlog
+  alias GraphQL.Schema.SimpleBlog.{Article, Author, Image}
+
+  defmodule Image do
+    def type do
+      %ObjectType{
+        name: "Image",
+        description: "Images for an article or a profile picture",
+        fields: %{
+          url: %{type: %String{}, description: "URL where the image of the appropriate size can be fetched"},
+          width: %{type: %Int{}, description: "Width in pixels"},
+          height: %{type: %Int{}, description: "Height in pixels"}
+        }
+      }
+    end
+  end
+
+  defmodule Author do
+    def type do
+      %ObjectType{
+        name: "Author",
+        description: "Author of the blog, with their profile picture and latest article",
+        fields: %{
+          id: %{type: %String{}, description: "Author ID"},
+          name: %{type: %String{}, description: "Author's name"},
+          pic: %{
+            args: %{
+              width: %{type: %Int{}, description: "Width in pixels"},
+              height: %{type: %Int{}, description: "Height in pixels"}
+            },
+            type: Image,
+            description: "Picture of the author",
+            resolve: fn(o, %{width: w, height: h}, _) -> o.pic.(w, h) end
+          },
+          recentArticle: %{
+            type: Article,
+            description: "The most recent article published by the author",
+            resolve: fn(_, _, _) -> SimpleBlog.make_article(100) end
+          }
+        }
+      }
+    end
+  end
+
+  defmodule Article do
+    def type do
+      %ObjectType{
+        name: "Article",
+        description: "A blog post",
+        fields: %{
+          id: %{type: %NonNull{ofType: %String{}}},
+          isPublished: %{type: %Boolean{}, description: "Is the article published yet?"},
+          author: %{type: Author, description: "Author of the article"},
+          title: %{type: %String{}, description: "Title of the article"},
+          body: %{type: %String{}, description: "Content of the article"},
+          keywords: %{type: %List{ofType: %String{}}, description: "Keywords describing the article contents"}
+        }
+      }
+    end
+  end
+
+  defmodule Query do
+    def type do
+      %ObjectType{
+        name: "Query",
+        description: "All the queries available to the client",
+        fields: %{
+          article: %{
+            type: %List{ofType: Article},
+            description: "An Article or blog post written by an Author",
+            args: %{id: %{type: %ID{}, description: "ID of the article"}},
+            resolve: fn
+              _, %{id: id}, _ -> [SimpleBlog.make_article(id)]
+              _, _, _         -> for id <- 1..2, do: SimpleBlog.make_article(id)
+            end
+          },
+          feed: %{
+            type: %List{ofType: Article},
+            description: "A feed of the latest articles",
+            resolve: fn(_, _, _) -> for id <- 1..2, do: SimpleBlog.make_article(id) end
+          }
+        }
+      }
+    end
+  end
 
   def schema do
-    image = %ObjectType{
-      name: "Image",
-      description: "Images for an article or a profile picture",
-      fields: %{
-        url: %{type: %String{}},
-        width: %{type: %Int{}},
-        height: %{type: %Int{}}
-      }
-    }
-
-    author = %ObjectType{
-      name: "Author",
-      description: "Author of the blog, with their profile picture and latest article",
-      fields: %{
-        id: %{type: %String{}},
-        name: %{type: %String{}},
-        pic: %{
-          args: %{
-            width: %{type: %Int{}},
-            height: %{type: %Int{}}
-          },
-          type: image,
-          resolve: fn(o, %{width: w, height: h}, _) -> o.pic(w, h) end
-        }
-      }
-    }
-
-    article = %ObjectType{
-      name: "Article",
-      description: "A blog post",
-      fields: %{
-        id: %{type: %NonNull{ofType: %String{}}},
-        isPublished: %{type: %Boolean{}},
-        author: %{type: author},
-        title: %{type: %String{}},
-        body: %{type: %String{}},
-        keywords: %{type: %List{ofType: %String{}}}
-      }
-    }
-
-    blog_query = %ObjectType{
-      name: "Query",
-      fields: %{
-        article: %{
-          type: %List{ofType: article},
-          args: %{id: %{type: %ID{}}},
-          resolve: fn
-            _, %{id: id}, _ -> [make_article(id)]
-            _, _, _         -> for id <- 1..2, do: make_article(id)
-          end
-        },
-        feed: %{
-          type: %List{ofType: article},
-          resolve: fn(_, _, _) -> for id <- 1..2, do: make_article(id) end
-        }
-      }
-    }
-
-    %Schema{query: blog_query}
+    %GraphQL.Schema{query: Query.type}
   end
 
   def make_article(id) do
@@ -78,18 +98,17 @@ defmodule GraphQL.Schema.SimpleBlog do
         id: "123",
         name: "John Smith",
         pic: fn(width, height) -> get_pic("123", width, height) end
-        # recentArticle: 1
       },
       title: "My Article #{id}",
-      body: "This is a post",
+      body: "This is the article content...",
       hidden: "This data is not exposed in the schema",
-      keywords: ["foo", "bar", 1, true, nil]
+      keywords: ["elixir", "graphql", "technology", "api", "rest"]
     }
   end
 
   def get_pic(uid, width, height) do
     %{
-      url: "cdn://#{uid}",
+      url: "cdn://example.com/images/#{uid}",
       width: "#{width}",
       height: "#{height}"
     }
