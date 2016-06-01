@@ -3,7 +3,7 @@ defmodule HelloGraphQL.Mixfile do
 
   def project do
     [app: :hello_graphql,
-     version: "0.2.0",
+     version: "0.3.0",
      elixir: "~> 1.2",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix] ++ Mix.compilers,
@@ -36,6 +36,6 @@ defmodule HelloGraphQL.Mixfile do
      {:phoenix_html, "~> 2.3"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:cowboy, "~> 1.0"},
-     {:plug_graphql, "~> 0.2.0"}]
+     {:plug_graphql, "~> 0.3.1"}]
   end
 end
