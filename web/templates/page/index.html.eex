@@ -6,39 +6,74 @@
 <div class="row marketing">
   <div class="col-lg-6">
     <h4>Hello World Example</h4>
+    <p>
+      This is the simplest possible schema definition with a single entry point working against hard-coded values.
+    </p>
     <ul>
       <li>
-        <a href="/graphql/hello?query={greeting}">/graphql/hello?query={greeting}</a>
+        <a href="https://github.com/graphql-elixir/hello_graphql_phoenix/blob/master/web/graphql/hello_world_schema.ex">
+          Schema definition
+        </a>
       </li>
       <li>
-        <a href='/graphql/hello?query={greeting(name:"Joe")}'>/graphql/hello?query={greeting(name:"Joe")}</a>
+        <a href="/graphql/hello?query=%7B%0A%20%20greeting%0A%7D%0A">
+          Simplest possible query
+        </a>
+      </li>
+      <li>
+        <a href='/graphql/hello?query=%7B%0A%20%20greeting(name%3A%20"Joe")%0A%7D%0A'>
+          Parameterise greeting query by name
+        </a>
       </li>
     </ul>
   </div>
 
   <div class="col-lg-6">
     <h4>Simple Blog Example</h4>
+    <p>
+      A simple schema definition with a variety of data types.
+    </p>
+    <p>
+      <strong>Hint: </strong><em>Try out the auto-complete of the queries and explore the documentation!</em>
+    </p>
     <ul>
       <li>
-        <a href="/graphql/blog?query={article(id:1){id,title,body,author{name}}}">/graphql/blog?query={article(id:"1"){id,title,body,author{name}}}</a>
+        <a href="https://github.com/graphql-elixir/hello_graphql_phoenix/blob/master/web/graphql/simple_blog_schema.ex">
+          Schema definition
+        </a>
       </li>
       <li>
-        <a href="/graphql/blog?query={feed{title,body},article(id:1){id,title,body,author{name}}}">/graphql/blog?query={feed{title,body},article(id:1){id,title,body,author{name}}}</a>
+        <a href="/graphql/blog?query=%7B%0A%20%20article(id%3A%201)%20%7B%0A%20%20%20%20title%0A%20%20%20%20body%0A%20%20%20%20author%20%7B%0A%20%20%20%20%20%20name%0A%20%20%20%20%20%20pic(width%3A%2050%2C%20height%3A%2050)%20%7B%0A%20%20%20%20%20%20%20%20url%0A%20%20%20%20%20%20%20%20width%0A%20%20%20%20%20%20%20%20height%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A">
+          Fetch an article by ID with nested author name and picture
+        </a>
+      </li>
+      <li>
+        <a href="/graphql/blog?query=%7B%0A%20%20feed%20%7B%0A%20%20%20%20title%0A%20%20%20%20body%0A%20%20%7D%0A%20%20article(id%3A%201)%20%7B%0A%20%20%20%20id%0A%20%20%20%20title%0A%20%20%20%20body%0A%20%20%20%20author%20%7B%0A%20%20%20%20%20%20name%0A%20%20%20%20%20%20recentArticle%20%7B%0A%20%20%20%20%20%20%20%20title%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A">
+          Fetch a blog feed and an article in one query
+        </a>
       </li>
     </ul>
   </div>
 
   <div class="col-lg-12">
     <h4>Simple Ecto Example</h4>
+    <p>
+      A variant of the Hello World schema definition using an Ecto-driven PostgreSQL datastore.
+    </p>
     <ul>
       <li>
-        <a href="/graphql/ecto?query={greeting(id:2)}">
-          /graphql/ecto?query={greeting(id:2)}
+        <a href="https://github.com/graphql-elixir/hello_graphql_phoenix/blob/master/web/graphql/ecto_world_schema.ex">
+          Schema definition
         </a>
       </li>
       <li>
-        <a href='/graphql/ecto?query={greeting(name:"Garrett1")}'>
-          /graphql/ecto?query={greeting(name:"Garrett1")}
+        <a href="/graphql/ecto?query=%7B%0A%20%20greeting(id%3A%202)%0A%7D%0A">
+          Greet a person fetched by ID
+        </a>
+      </li>
+      <li>
+        <a href='/graphql/ecto?query=%7B%0A%20%20greeting(name%3A%20"Garrett1")%0A%7D%0A'>
+          Greet a person fetched by name
         </a>
       </li>
     </ul>
@@ -46,15 +81,26 @@
 
   <div class="col-lg-12">
     <h4>Star Wars Example</h4>
+    <p>
+      A more complex schema containing Enum types and Interfaces. Data is stored in memory.
+    </p>
+    <p>
+      Note the use of type introspection using the `__typename` field.
+    </p>
     <ul>
       <li>
-        <a href="/graphql/starwars?query={hero{name}}">
-          /graphql/starwars?query={hero{name}}
+        <a href="https://github.com/graphql-elixir/hello_graphql_phoenix/blob/master/web/graphql/star_wars_schema.ex">
+          Schema definition
         </a>
       </li>
       <li>
-        <a href='/graphql/starwars?query={hero(episode:EMPIRE){name}}'>
-          /graphql/starwars?query={hero(episode:EMPIRE){name}}
+        <a href="/graphql/starwars?query=%7B%0A%20%20hero%20%7B%0A%20%20%20%20name%0A%20%20%20%20appears_in%0A%20%20%20%20friends%7B%0A%20%20%20%20%20%20name%0A%20%20%20%20%20%20__typename%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A">
+          Fetch the hero of Star Wars
+        </a>
+      </li>
+      <li>
+        <a href='/graphql/starwars?query=%7B%0A%20%20hero(episode%3A%20EMPIRE)%20%7B%0A%20%20%20%20name%0A%20%20%20%20appears_in%0A%20%20%20%20friends%20%7B%0A%20%20%20%20%20%20name%0A%20%20%20%20%20%20friends%20%7B%0A%20%20%20%20%20%20%20%20name%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A'>
+          Fetch the hero of a specific film (with nested friends of friends)
         </a>
       </li>
     </ul>
