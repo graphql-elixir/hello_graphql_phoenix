@@ -45,7 +45,7 @@ defmodule GraphQL.Schema.StarWars do
           name: %{type: %String{}},
           friends: %{
             type: %List{ofType: Character},
-            resolve: fn(item, _, _) -> StarWars.Data.get_friends(item) end
+            resolve: fn(item, _args, _info) -> StarWars.Data.get_friends(item) end
           },
           appears_in: %{type: %List{ofType: Episode}},
           home_planet: %{type: %String{}}
@@ -65,7 +65,7 @@ defmodule GraphQL.Schema.StarWars do
           name: %{type: %String{}},
           friends: %{
             type: %List{ofType: Character},
-            resolve: fn(item, _, _) -> StarWars.Data.get_friends(item) end
+            resolve: fn(item, _args, _info) -> StarWars.Data.get_friends(item) end
           },
           appears_in: %{type: %List{ofType: Episode}},
           primary_function: %{type: %String{}}
@@ -88,7 +88,7 @@ defmodule GraphQL.Schema.StarWars do
               description: "If omitted, returns the hero of the whole saga. If provided, returns the hero of that particular episode"
             }
           },
-          resolve: fn(_, args, _) ->
+          resolve: fn(_source, args, _info) ->
             StarWars.Data.get_hero(Map.get(args, :episode))
           end
         },
@@ -97,14 +97,14 @@ defmodule GraphQL.Schema.StarWars do
           args: %{
             id: %{type: %NonNull{ofType: %String{}}, description: "id of the human"}
           },
-          resolve: fn(_, args, _) -> StarWars.Data.get_human(args.id) end
+          resolve: fn(_source, args, _info) -> StarWars.Data.get_human(args.id) end
         },
         droid: %{
           type: Droid,
           args: %{
             id: %{type: %NonNull{ofType: %String{}}, description: "id of the droid"}
           },
-          resolve: fn(_, args, _) -> StarWars.Data.get_droid(args.id) end
+          resolve: fn(_source, args, _info) -> StarWars.Data.get_droid(args.id) end
         }
       }
     }
