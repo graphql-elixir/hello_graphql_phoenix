@@ -32,12 +32,12 @@ defmodule GraphQL.Schema.SimpleBlog do
             },
             type: Image,
             description: "Picture of the author",
-            resolve: fn(o, %{width: w, height: h}, _) -> o.pic.(w, h) end
+            resolve: fn(o, %{width: w, height: h}, _info) -> o.pic.(w, h) end
           },
           recentArticle: %{
             type: Article,
             description: "The most recent article published by the author",
-            resolve: fn(_, _, _) -> SimpleBlog.make_article(100) end
+            resolve: fn(_source, _args, _info) -> SimpleBlog.make_article(100) end
           }
         }
       }
@@ -72,14 +72,14 @@ defmodule GraphQL.Schema.SimpleBlog do
             description: "An Article or blog post written by an Author",
             args: %{id: %{type: %ID{}, description: "ID of the article"}},
             resolve: fn
-              _, %{id: id}, _ -> [SimpleBlog.make_article(id)]
-              _, _, _         -> for id <- 1..2, do: SimpleBlog.make_article(id)
+              _source, %{id: id}, _info -> [SimpleBlog.make_article(id)]
+              _source, _args, _info     -> for id <- 1..2, do: SimpleBlog.make_article(id)
             end
           },
           feed: %{
             type: %List{ofType: Article},
             description: "A feed of the latest articles",
-            resolve: fn(_, _, _) -> for id <- 1..2, do: SimpleBlog.make_article(id) end
+            resolve: fn(_source, _args, _info) -> for id <- 1..2, do: SimpleBlog.make_article(id) end
           }
         }
       }

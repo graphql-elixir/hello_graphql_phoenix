@@ -18,6 +18,6 @@ defmodule GraphQL.Schema.HelloWorld do
     }
   end
 
-  def greeting(_, %{name: name}, _), do: "Hello, #{name}!"
-  def greeting(_, _, _), do: "Hello, world!"
+  def greeting(_source, %{name: name}, _info), do: "Hello, #{name}!"
+  def greeting(_source, _args, _info), do: "Hello, world!"
 end
