@@ -4,7 +4,7 @@ defmodule HelloGraphQL.Mixfile do
   def project do
     [app: :hello_graphql,
      version: "0.3.0",
-     elixir: "~> 1.2",
+     elixir: "~> 1.3",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -30,11 +30,11 @@ defmodule HelloGraphQL.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.1"},
-     {:phoenix_ecto, "~> 1.1"},
-     {:postgrex, ">= 0.0.0"},
-     {:phoenix_html, "~> 2.3"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
+    [{:phoenix, "~> 1.2"},
+     {:phoenix_ecto, "~> 3.0"},
+     {:postgrex, "~> 0.12"},
+     {:phoenix_html, "~> 2.6"},
+     {:phoenix_live_reload, "~> 1.0.5", only: :dev},
      {:cowboy, "~> 1.0"},
      {:plug_graphql, "~> 0.3.1"}]
   end
