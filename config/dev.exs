@@ -34,8 +34,8 @@ config :phoenix, :stacktrace_depth, 20
 
 config :hello_graphql, HelloGraphQL.Repo,
   adapter: Ecto.Adapters.Postgres,
-  # username: "postgres",
-  # password: "",
+  username: "postgres",
+  password: "postgres",
   database: "hello_graphql_dev",
   hostname: "localhost",
   pool_size: 10
